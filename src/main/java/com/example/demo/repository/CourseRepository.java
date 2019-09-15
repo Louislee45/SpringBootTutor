@@ -30,6 +30,7 @@ public class CourseRepository {
                 .build();
 
         courses.add(javaOne);
+        courses.add(two);
     }
 
 
@@ -45,10 +46,15 @@ public class CourseRepository {
     }
 
     public List<Course> findCourseByName(String courseName) {
-        if(courseName.equals("Java_I")) {
+        if(courseName.equals("Java_II")) {
             return courses;
         }
 
         return new ArrayList<Course>();
+    }
+
+    public int[] findTwoSum(int target) {
+        int[] res = new int[]{-1, target};
+        return res;
     }
 }

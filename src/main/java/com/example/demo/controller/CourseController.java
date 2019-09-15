@@ -3,9 +3,11 @@ package com.example.demo.controller;
 import com.example.demo.modal.Course;
 import com.example.demo.modal.dto.CourseDto;
 import com.example.demo.service.CourseService;
+import com.example.demo.service.TwoSumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +25,9 @@ public class CourseController {
     @Autowired // IOC 控制反转
     CourseService courseService; // Singleton
     //依赖注入 Dependency Injection
+
+    @Autowired
+    TwoSumService twoSumService;
 
     @GetMapping(path = "/", produces = "application/json") //如果你用get方法 call我这个地址
     public HttpEntity findAllCourses(){
@@ -45,6 +50,13 @@ public class CourseController {
 
         return new ResponseEntity(findedCourse, HttpStatus.OK);
     }
+
+    @GetMapping(path = "/twoSum/{target}", produces = "application/json")
+    public HttpEntity twoSum(@PathVariable("target") Integer target) {
+        int[] res = twoSumService.getTwoSum(target);
+        return new ResponseEntity(res, HttpStatus.OK);
+    }
+
 }
 
 // 增加一个课程/删除一个课程/更新一个课程信息
